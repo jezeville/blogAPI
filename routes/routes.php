@@ -3,12 +3,29 @@
 
   require_once __DIR__.'/router.php';
 
+  post('/login',function(){
+    require '../config/config.php';
+    require '../model/authModel.php';
+    require '../controller/authController.php';
+    $authController = new Auth();
+    $authController->login($db);
+  });
+
   get('/posts', function(){
+    $offset = 0;
     require '../config/config.php';
     require '../model/postModel.php';
     require '../controller/postController.php';
     $apiController = new ApiController();
-    $apiController->getAllData($db);
+    $apiController->getAllData($db,$offset);
+  });
+
+  get('/posts/$offset', function($offset){
+    require '../config/config.php';
+    require '../model/postModel.php';
+    require '../controller/postController.php';
+    $apiController = new ApiController();
+    $apiController->getAllData($db,$offset);
   });
 
   get('/post/$id', function($id){

@@ -8,8 +8,8 @@
             $this->db = $db;
         }
 
-        public function getAll(){
-            $query = $this->db->query("SELECT * FROM posts");
+        public function getAll($offset){
+            $query = $this->db->query("SELECT * FROM posts LIMIT 5 OFFSET $offset");
             return $query->fetchAll(PDO::FETCH_ASSOC);
         }
 
